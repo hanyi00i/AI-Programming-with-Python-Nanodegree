@@ -43,37 +43,41 @@ def get_pet_labels(image_dir):
     # Replace None with the results_dic dictionary that you created with this function
     # return None
     
-    # Retrieve the filenames from folder pet_images/
-    filename_list = listdir("pet_images/")
+    filename_list = listdir(image_dir)
 
     # Creates empty dictionary named results_dic
     results_dic = dict()
     
     for idx in range(0, len(filename_list), 1):
-        # Sets string to lower case letters
-        low_pet_image = filename_list[idx].lower()
-
-        # Splits lower case string by _ to break into words 
-        word_list_pet_image = low_pet_image.split("_")
-
-        # Create pet_name starting as empty string
-        pet_name = ""
-
-        # Loops to check if word in pet name is only
-        # alphabetic characters - if true append word
-        # to pet_name separated by trailing space 
-        for word in word_list_pet_image:
-            if word.isalpha():
-                pet_name += word + " "
-
-        # Strip off starting/trailing whitespace characters 
-        pet_name = pet_name.strip()
         
-        if filename_list[idx] not in results_dic:
-            results_dic[filename_list[idx]] = [pet_name]
+        # always take into account files starting with a '.' also known as hidden files. 
+        # These files can cause potential bugs to your programs and destroy as it scales.
+        if not filename_list[idx][0] == ".": # check if filename_list in the current loop does not start with a '.'
         
-        else:
-            print("** Warning: Key=", filename_list[idx], "already exists in results_dic with value =", results_dic[filename_list[idx]])
+            # Sets string to lower case letters
+            low_pet_image = filename_list[idx].lower()
+
+            # Splits lower case string by _ to break into words 
+            word_list_pet_image = low_pet_image.split("_")
+
+            # Create pet_name starting as empty string
+            pet_name = ""
+
+            # Loops to check if word in pet name is only
+            # alphabetic characters - if true append word
+            # to pet_name separated by trailing space 
+            for word in word_list_pet_image:
+                if word.isalpha():
+                    pet_name += word + " "
+
+            # Strip off starting/trailing whitespace characters 
+            pet_name = pet_name.strip()
+        
+            if filename_list[idx] not in results_dic:
+                results_dic[filename_list[idx]] = [pet_name]
+        
+            else:
+                print("** Warning: Key=", filename_list[idx], "already exists in results_dic with value =", results_dic[filename_list[idx]])
 
         
     return results_dic

@@ -65,11 +65,11 @@ def classify_images(images_dir, results_dic, model):
      Returns:
            None - results_dic is mutable data type so no return needed.         
     """
-    filenames = listdir(images_dir)
-    
-    for idx in range(0, len(filenames), 1):
+    # Looping through the filenames = listdir(images_dir) directly isn't ideal,
+    # doing so would require you to get rid of hidden files all over again (because you are looping through the directory itself). 
+    # results_dic dictionary has its values in a list where the label/pet_label is the initial item
+    for key in results_dic:
         
-        key = filenames[idx]
         # Get the classifier label
         classifier_labels = classifier(images_dir + "/" + key, model)
         

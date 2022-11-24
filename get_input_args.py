@@ -55,4 +55,4 @@ def get_input_args():
     return in_args
 
     # Accesses values of Argument 1 by printing it
-    print("Argument 1:", in_args.dir)
+    # print("Argument 1:", in_args.dir)
